@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.moka.utils.data;
 
 /**
- * Represents a line and character number within 
+ * Represents a line and character number within a [named] file
  * @author Louis Capitanchik
  */
 public class Location {

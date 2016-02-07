@@ -29,7 +29,7 @@
  */
 package co.louiscap.moka;
 
-import co.louiscap.moka.util.io.MultiplexedStringPrinter;
+import co.louiscap.moka.utils.io.MultiplexedStringPrinter;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -63,7 +63,7 @@ public class MokaCLI {
         
         if(PROGOPTS.hasOption("h")) {
             HelpFormatter hf = new HelpFormatter();
-            hf.printHelp("Moka", opts, true);
+            hf.printHelp("moka", opts, true);
             System.exit(0);
         }
         

@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.modules;
 
+import co.louiscap.moka.exceptions.InvalidModuleException;
 import co.louiscap.moka.lexer.LexFile;
 import co.louiscap.moka.parser.LangFile;
 import co.louiscap.moka.translator.InterpFile;

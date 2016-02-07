@@ -29,10 +29,61 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.lexer;
 
+import co.louiscap.moka.utils.data.Location;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- *
+ * Represents a singular lexical rule associating one regular expression with
+ * a language token. The properties of LexRule are Immutable as it encapsulates
+ * a line from a definition file, which would need to be reloaded and recreated
+ * to show any changes.
  * @author Louis Capitanchik
  */
-public class LexRule {
+public class LexRule implements Comparable<LexRule> {
+
+    private final Integer priority;
+    private final String outToken;
+    private final Pattern regex;
     
+    public LexRule (int priority, String token, String pattern) {
+        this.priority = priority;
+        this.outToken = token;
+        
+        if(!pattern.startsWith("^")) {
+            pattern = "^" + pattern;
+        }
+        
+        this.regex = Pattern.compile(pattern);
+    }
+    
+    @Override
+    public int compareTo(LexRule o) {
+        return o.priority - this.priority;
+    }
+    
+    public Integer getPriority() {
+        return this.priority;
+    }
+    
+    public String getOutToken() {
+        return this.outToken;
+    }
+
+    public Pattern getRegex() {
+        return this.regex;
+    }
+    
+    public Token apply(String src, Location currentLocation) {
+        Matcher match = regex.matcher(src);
+        if (!match.find()) {
+            return null;
+        } else {
+            String content = "";
+            if (match.groupCount() > 0) {
+                content = match.group(1);
+            }
+            return new Token(this.outToken, content, currentLocation);
+        }
+    }
 }

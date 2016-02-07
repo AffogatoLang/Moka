@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.modules;
 
+import co.louiscap.moka.exceptions.InvalidModuleException;
 import java.io.File;
 import java.util.Arrays;
 import org.apache.commons.io.filefilter.NameFileFilter;

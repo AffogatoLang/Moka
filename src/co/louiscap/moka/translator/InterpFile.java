@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.translator;
 
-import co.louiscap.moka.util.io.ModuleFile;
+import co.louiscap.moka.utils.io.ModuleFile;
 import java.util.LinkedList;
 
 /**

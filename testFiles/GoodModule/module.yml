@@ -1,0 +1,9 @@
+---
+name: "Good Module"
+version: "1.0.0"
+author: "Louis Capitanchik"
+license: "BSD 3-Clause"
+core: "OtherModule"
+deps:
+    - "OtherModule@5.0.0"
+    - "ThisThat@1.3.4^"

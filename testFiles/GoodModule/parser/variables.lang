@@ -1,0 +1,8 @@
+# Set up the types of variable declaration
+S_VAR_DEC : T_VAR_DEC T_IDENT
+S_VAR_ASSIGN : S_VAR_DEC T_ASSIGN S_DATA
+S_VAR_ASSIGN : T_IDENT T_IDENT S_DATA
+
+# Define all of the statement types
+S_STATEMENT : S_VAR_DEC T_EOL
+S_STATEMENT : S_VAR_ASSIGN T_EOL

@@ -51,181 +51,181 @@ public class MultiplexedStringPrinterTest {
     @BeforeClass
     public static void setUpClass() {
     }
-
-    /**
-     * Test of addChannel method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testAddChannel() {
-        System.out.println("addChannel");
-        String tag = "";
-        PrintStream channel = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.addChannel(tag, channel);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeChannels method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testRemoveChannels() {
-        System.out.println("removeChannels");
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.removeChannels(tags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getChannel method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testGetChannel() {
-        System.out.println("getChannel");
-        String tag = "";
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        PrintStream expResult = null;
-        PrintStream result = instance.getChannel(tag);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getChannels method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testGetChannels() {
-        System.out.println("getChannels");
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        PrintStream[] expResult = null;
-        PrintStream[] result = instance.getChannels(tags);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of println method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testPrintln_String() {
-        System.out.println("println");
-        String s = "";
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.println(s);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of println method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testPrintln_String_StringArr() {
-        System.out.println("println");
-        String s = "";
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.println(s, tags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of print method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testPrint_String() {
-        System.out.println("print");
-        String s = "";
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.print(s);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of print method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testPrint_String_StringArr() {
-        System.out.println("print");
-        String s = "";
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.print(s, tags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of close method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testClose_0args() {
-        System.out.println("close");
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of close method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testClose_StringArr() {
-        System.out.println("close");
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.close(tags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of flush method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testFlush_0args() {
-        System.out.println("flush");
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.flush();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of flush method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testFlush_StringArr() {
-        System.out.println("flush");
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        instance.flush(tags);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getBatch method, of class MultiplexedStringPrinter.
-     */
-    @Test
-    public void testGetBatch() {
-        System.out.println("getBatch");
-        String[] tags = null;
-        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
-        MultiplexedStringPrinter expResult = null;
-        MultiplexedStringPrinter result = instance.getBatch(tags);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+//
+//    /**
+//     * Test of addChannel method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testAddChannel() {
+//        System.out.println("addChannel");
+//        String tag = "";
+//        PrintStream channel = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.addChannel(tag, channel);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of removeChannels method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testRemoveChannels() {
+//        System.out.println("removeChannels");
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.removeChannels(tags);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getChannel method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testGetChannel() {
+//        System.out.println("getChannel");
+//        String tag = "";
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        PrintStream expResult = null;
+//        PrintStream result = instance.getChannel(tag);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getChannels method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testGetChannels() {
+//        System.out.println("getChannels");
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        PrintStream[] expResult = null;
+//        PrintStream[] result = instance.getChannels(tags);
+//        assertArrayEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of println method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testPrintln_String() {
+//        System.out.println("println");
+//        String s = "";
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.println(s);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of println method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testPrintln_String_StringArr() {
+//        System.out.println("println");
+//        String s = "";
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.println(s, tags);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of print method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testPrint_String() {
+//        System.out.println("print");
+//        String s = "";
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.print(s);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of print method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testPrint_String_StringArr() {
+//        System.out.println("print");
+//        String s = "";
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.print(s, tags);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of close method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testClose_0args() {
+//        System.out.println("close");
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.close();
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of close method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testClose_StringArr() {
+//        System.out.println("close");
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.close(tags);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of flush method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testFlush_0args() {
+//        System.out.println("flush");
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.flush();
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of flush method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testFlush_StringArr() {
+//        System.out.println("flush");
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        instance.flush(tags);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getBatch method, of class MultiplexedStringPrinter.
+//     */
+//    @Test
+//    public void testGetBatch() {
+//        System.out.println("getBatch");
+//        String[] tags = null;
+//        MultiplexedStringPrinter instance = new MultiplexedStringPrinter();
+//        MultiplexedStringPrinter expResult = null;
+//        MultiplexedStringPrinter result = instance.getBatch(tags);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//    
 }

@@ -27,25 +27,51 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.utils;
+package co.louiscap.moka.lexer;
 
-import java.util.ArrayList;
-
+import co.louiscap.moka.utils.data.Location;
+import org.apache.commons.collections4.bag.TreeBag;
+import org.junit.BeforeClass;
+import static org.junit.Assert.*;
+import org.junit.Test;
 /**
- * Simple methods for getting meta information from strings, and manipulating
- * them
  * @author Louis Capitanchik
  */
-public class StringUtils {
-    public static int[] getNewlineIndexes(String src) {
-        ArrayList<Integer> indexes = new ArrayList<>();
-        
-        int cur = 0;
-        
-        while((cur = src.indexOf("\n", cur)) != -1) {
-            indexes.add(cur);
-        }
-        
-        return indexes.stream().mapToInt(i -> i).toArray();
+public class LexerTest {
+    
+    public static LexRule[] simpleRules;
+    
+    public LexerTest() {
     }
+    
+    @BeforeClass
+    public static void setUpClass() {
+        TreeBag<LexRule> rules = new TreeBag<>();
+        rules.add(new LexRule(15, "T_IDENT", "([A-Za-z]\\w*)"));
+        rules.add(new LexRule(1, "T_EOL", "!"));
+        rules.add(new LexRule(7, "T_WHITESPACE", "\\s+"));
+        simpleRules = rules.stream().toArray(i -> new LexRule[i]);
+    }
+
+    /**
+     * Test of process method, of class Lexer.
+     */
+    @Test
+    public void testProcess() throws Exception {
+        System.out.println("Process:");
+        System.out.println("\tFilename: file.aff");
+        System.out.println("\tProgram: `hello there!`");
+        String src = "hello there!";
+        String name = "file.aff";
+        Lexer instance = new Lexer(simpleRules);
+        Token[] expResult = {
+            new Token("T_IDENT", "hello", new Location(name, 1, 0)),
+            new Token("T_WHITESPACE", " ", new Location(name, 1, 5)),
+            new Token("T_IDENT", "there", new Location(name, 1, 6)),
+            new Token("T_EOL", "!", new Location(name, 1, 11)),
+        };
+        Token[] result = instance.process(src, name);
+        assertArrayEquals(expResult, result);
+    }
+    
 }

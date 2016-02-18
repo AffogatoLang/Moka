@@ -29,12 +29,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.modules;
 
+import co.louiscap.moka.MokaCLI;
+import co.louiscap.moka.exceptions.InvalidFormatException;
 import co.louiscap.moka.exceptions.InvalidModuleException;
 import co.louiscap.moka.lexer.LexFile;
 import co.louiscap.moka.parser.LangFile;
 import co.louiscap.moka.translator.InterpFile;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -67,7 +70,7 @@ public class Module {
     
     private String tmpid, id;
     
-    public Module(File verifiedSourceDir) throws InvalidModuleException {
+    public Module(File verifiedSourceDir) throws InvalidModuleException, InvalidFormatException {
         directory = verifiedSourceDir;
         
         tmpid = directory.getName();
@@ -85,7 +88,7 @@ public class Module {
         try {
             propString = FileUtils.readFileToString(new File(directory, ModuleReader.MODULE_FILE_NAME), "utf-8");
         } catch (IOException ex) {
-            Logger.getLogger(Module.class.getName()).log(Level.SEVERE, null, ex);
+            MokaCLI.PRINTER.println(ex.getLocalizedMessage(), "err");
             throw new InvalidModuleException(tmpid, "Cannot load " + ModuleReader.MODULE_FILE_NAME, ex);
         }
         
@@ -97,14 +100,6 @@ public class Module {
         properties = yaml.loadAs(propString, Map.class);
         
         validatePropertiesFile(properties);
-    }
-    
-    public static void validatePropertiesFile(Map fileContents) {
-        for(String s : requiredProps) {
-            if(!fileContents.containsKey(s)) {
-                //TODO : Throw proper errors
-            }
-        }
     }
     
     public String getID() {
@@ -231,9 +226,29 @@ public class Module {
             try {
                 storage.put(FilenameUtils.getBaseName(cur.getPath()), FileUtils.readFileToString(cur, "utf-8"));
             } catch (IOException ex) {
+                MokaCLI.PRINTER.println("Failed to load lexical file " + cur.getAbsolutePath(), "err");
+                ex.printStackTrace();
                 Logger.getLogger(Module.class.getName()).log(Level.INFO, "Failed to load lexical file {0}", cur.getAbsolutePath());
                 Logger.getLogger(Module.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    private void validatePropertiesFile(Map fileContents) throws InvalidFormatException {
+        for(String s : requiredProps) {
+            if(!fileContents.containsKey(s)) {
+                throw new InvalidFormatException(directory.getAbsolutePath() + 
+                        ModuleReader.MODULE_FILE_NAME,
+                        ModuleReader.MODULE_FILE_NAME + 
+                        "Does not contain the required property " + 
+                        s);
+            }
+        }
+        
+        
+        
+        if(!fileContents.containsKey("deps")) {
+            fileContents.put("deps", new ArrayList());
         }
     }
 }

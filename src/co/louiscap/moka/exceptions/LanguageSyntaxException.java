@@ -27,61 +27,37 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.utils.data;
+package co.louiscap.moka.exceptions;
 
-import java.util.Objects;
+import co.louiscap.moka.utils.data.Location;
 
 /**
- * Represents a line and character number within a [named] file
+ * An exception thrown when the source program contains
+ * an error in the syntax, or some inconsistency exists
+ * between the provided source and the given language
+ * specification
  * @author Louis Capitanchik
  */
-public class Location {
-    public final String filename;
-    public final int line, column;
-
-    public Location(String filename, int line, int column) {
-        this.filename = filename;
-        this.line = line;
-        this.column = column;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" + "filename=" + filename + ", line=" + line + ", column=" + column + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.filename);
-        hash = 37 * hash + this.line;
-        hash = 37 * hash + this.column;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Location other = (Location) obj;
-        if (this.line != other.line) {
-            return false;
-        }
-        if (this.column != other.column) {
-            return false;
-        }
-        if (!Objects.equals(this.filename, other.filename)) {
-            return false;
-        }
-        return true;
-    }
+public class LanguageSyntaxException extends Exception {
+    public final Location loc;
     
-    
+    public LanguageSyntaxException(String reason, Location loc) {
+        super(createMsg(reason, loc));
+        this.loc = loc;
+    }
+    public LanguageSyntaxException(String reason, Location loc, Throwable cause) {
+        super(createMsg(reason, loc), cause);
+        this.loc = loc;
+    }
+    private static String createMsg(String reason, Location loc) {
+        String msg = "";
+        msg += reason;
+        msg += " at line ";
+        msg += loc.line;
+        msg += ", char ";
+        msg += loc.column;
+        msg += " in file ";
+        msg += loc.filename;
+        return msg;
+    }
 }

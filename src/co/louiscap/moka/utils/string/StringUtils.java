@@ -27,61 +27,36 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.utils.data;
+package co.louiscap.moka.utils.string;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Represents a line and character number within a [named] file
+ * Simple methods for getting meta information from strings, and manipulating
+ * them
  * @author Louis Capitanchik
  */
-public class Location {
-    public final String filename;
-    public final int line, column;
-
-    public Location(String filename, int line, int column) {
-        this.filename = filename;
-        this.line = line;
-        this.column = column;
+public class StringUtils {
+    private static final Pattern NEWLINE_REGEX = Pattern.compile("(\\r\\n)|(\\n)|(\\r)");
+    public static int[] getNewlineIndexes(String src) {
+        ArrayList<Integer> indexes = new ArrayList<>();
+        
+        int cur = 0;
+        
+        while((cur = src.indexOf("\n", cur)) != -1) {
+            indexes.add(cur);
+        }
+        
+        return indexes.stream().mapToInt(i -> i).toArray();
     }
-
-    @Override
-    public String toString() {
-        return "Location{" + "filename=" + filename + ", line=" + line + ", column=" + column + '}';
+    public static int linesInString(String s) {
+        Matcher m = NEWLINE_REGEX.matcher(s);
+        int lines = 1;
+        while (m.find()) {
+            lines += 1;
+        }
+        return lines;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.filename);
-        hash = 37 * hash + this.line;
-        hash = 37 * hash + this.column;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Location other = (Location) obj;
-        if (this.line != other.line) {
-            return false;
-        }
-        if (this.column != other.column) {
-            return false;
-        }
-        if (!Objects.equals(this.filename, other.filename)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 }

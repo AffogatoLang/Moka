@@ -75,6 +75,31 @@ public class MultiplexedStringPrinter {
     }
     
     /**
+     * Allows retrieval of a channel that has previously been assigned to this
+     * MultiplexedStringPrinter instance
+     * @param tag The tag of the channel to retrieve
+     * @return The channel with the specified tag, or null if no such tag exists
+     */
+    public PrintStream getChannel (String tag){
+        return channels.get(tag);
+    }
+    
+    /**
+     * Allows retrieval of multiple channels that have previously been assigned
+     * to this MultiplexedStringPrinter instance
+     * @param tags A list of tags to retrieve
+     * @return An array containing all of the channels whose tags were specified
+     * by the tags parameter <i>and</i> had previously been assigned to the
+     * StringPrinter
+     */
+    public PrintStream[] getChannels (String... tags) {
+        return Arrays.stream(tags)
+                .map(tag -> channels.get(tag))
+                .filter(channel -> channel != null)
+                .toArray(PrintStream[]::new);
+    }
+    
+    /**
      * Print a string and then a newline to every print stream in this MultiplexedStringPrinter
      * @param s The string to print out
      * @see java.io.PrintStream#println(java.lang.String)

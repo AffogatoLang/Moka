@@ -33,6 +33,27 @@ package co.louiscap.moka.exceptions;
  * Thrown when the format of a module file doesn't conform to the specification
  * @author Louis Capitanchik
  */
-public class InvalidFormatException {
+public class InvalidFormatException extends Exception {
+
+    protected String filename;
+    
+    public InvalidFormatException(String filename, String reason) {
+        super("[" + filename + "] " + reason);
+        this.filename = filename;
+    }
+
+    public InvalidFormatException(String filename, String reason, Throwable cause) {
+        super("[" + filename + "] " + reason, cause);
+        this.filename = filename;
+    }
+    
+    /**
+     * Gets the name of the file that caused this exception to occur, to 
+     * potentially allow for better error capture and rethrowing
+     * @return The name of the file that caused this exception.
+     */
+    public String getFilename() {
+        return filename;
+    }
     
 }

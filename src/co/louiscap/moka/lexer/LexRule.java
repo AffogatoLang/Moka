@@ -59,7 +59,7 @@ public class LexRule implements Comparable<LexRule> {
     
     @Override
     public int compareTo(LexRule o) {
-        return o.priority - this.priority;
+        return this.priority - o.priority;
     }
     
     public Integer getPriority() {
@@ -86,4 +86,19 @@ public class LexRule implements Comparable<LexRule> {
             return new Token(this.outToken, content, currentLocation);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(priority);
+        sb.append(" : ");
+        sb.append(outToken);
+        sb.append(" : ");
+        sb.append(regex.toString());
+        
+        return sb.toString();
+    }
+    
+    
 }

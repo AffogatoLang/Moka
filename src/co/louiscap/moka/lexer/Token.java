@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.moka.lexer;
 
 import co.louiscap.moka.utils.data.Location;
+import java.util.Objects;
 
 /**
  * A singular lexical token; an atomic element of a program's source code.
@@ -46,4 +47,39 @@ public class Token {
         this.content = content;
         this.loc = loc;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.ident);
+        hash = 67 * hash + Objects.hashCode(this.content);
+        hash = 67 * hash + Objects.hashCode(this.loc);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Token other = (Token) obj;
+        if (!Objects.equals(this.ident, other.ident)) {
+            return false;
+        }
+        if (!Objects.equals(this.content, other.content)) {
+            return false;
+        }
+        if (!Objects.equals(this.loc, other.loc)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

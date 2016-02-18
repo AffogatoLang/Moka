@@ -29,6 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka;
 
+import org.apache.commons.cli.CommandLine;
+
 /**
  *
  * @author Louis Capitanchik
@@ -39,6 +41,10 @@ public class LexerCLI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+    }
+    
+    public static void main(CommandLine args) {
         
     }
     

@@ -71,6 +71,13 @@ public class MokaCLI {
             PRINTER.addChannel("debug", System.out);
         }
         
+        if(PROGOPTS.hasOption("m")) {
+            String opt = PROGOPTS.getOptionValue("m");
+            switch(opt) {
+                
+            }
+        }
+        
         System.exit(312);
     }
     
@@ -80,7 +87,7 @@ public class MokaCLI {
         options.addOption("o", "out", true, "Outfile; the compilation target");
         options.addOption("e", true, "File encoding. Defaults to UTF-8");
         options.addOption("h", "help", false, "Print out this help text");
-        options.addOption("m", true, "Set the mode; only run one section of Moka."
+        options.addOption("m", "mode", true, "Set the mode; only run one section of Moka."
                 + "Requires `chunk` to be specified for the pre-compiled sub"
                 + "section being used");
         return options;

@@ -29,7 +29,7 @@
  */
 package co.louiscap.moka;
 
-import co.louiscap.moka.utils.io.MultiplexedStringPrinter;
+import co.louiscap.moka.utils.io.Logging;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -44,21 +44,19 @@ import org.apache.commons.cli.ParseException;
  */
 public class MokaCLI {
 
-    public static final MultiplexedStringPrinter PRINTER = new MultiplexedStringPrinter();
+//    public static final MultiplexedStringPrinter PRINTER = new MultiplexedStringPrinter();
     public static CommandLine PROGOPTS;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PRINTER.addChannel("out", System.out);
-        PRINTER.addChannel("err", System.err);
         
         CommandLineParser cliparse = new DefaultParser();
         Options opts = setupCommandLine();
         try {
             PROGOPTS = cliparse.parse(opts, args);
         } catch (ParseException ex) {
-            PRINTER.println(ex.getMessage(), "err");
+            Logging.LOGGER.println(ex.getMessage(), "err");
         }
         
         if(PROGOPTS.hasOption("h")) {
@@ -68,26 +66,37 @@ public class MokaCLI {
         }
         
         if(PROGOPTS.hasOption("v")) {
-            PRINTER.addChannel("debug", System.out);
+            Logging.LOGGER.addChannel("debug", System.out);
         }
         
         if(PROGOPTS.hasOption("m")) {
             String opt = PROGOPTS.getOptionValue("m");
             switch(opt) {
-                
+                case "lexer":
+                    System.exit(LexerCLI.main(PROGOPTS));
+                    break;
+                default:
+                    Logging.LOGGER.println("No such mode " + opt, "err");
+                    System.exit(404);
             }
         }
         
-        System.exit(312);
+        System.exit(0);
     }
     
     private static Options setupCommandLine() {
         Options options = new Options();
         options.addOption("v", false, "Verbose; Print debug info to stdout");
         options.addOption("o", "out", true, "Outfile; the compilation target");
+        options.addOption("p", "partial", true, "Specify the precompiled partial"
+                + " to be used for parsing the source program");
+        options.addOption("b", false, "Build a Moka partial that includes "
+                + "configurations up to and including the segment specified with "
+                + "the `mode` option, or a full partial if no `mode` is specified.");
         options.addOption("e", true, "File encoding. Defaults to UTF-8");
         options.addOption("h", "help", false, "Print out this help text");
-        options.addOption("m", "mode", true, "Set the mode; only run one section of Moka."
+        options.addOption("m", "mode", true, "Set the mode; only run a "
+                + "sub-section of Moka. "
                 + "Requires `chunk` to be specified for the pre-compiled sub"
                 + "section being used");
         return options;

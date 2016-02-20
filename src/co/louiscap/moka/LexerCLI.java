@@ -29,23 +29,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka;
 
+import co.louiscap.moka.utils.io.Logging;
 import org.apache.commons.cli.CommandLine;
 
 /**
- *
  * @author Louis Capitanchik
  */
 public class LexerCLI {
-
     /**
-     * @param args the command line arguments
+     * Runs the program up in lexer only mode. Requires a pre-parsed command line
+     * rather than the standard array of string args.
+     * @param args A list of pre-parsed command line options. Globals like the
+     * logging system should already be configured (although lexer specific options
+     * may override global configs for the purpose of running solely as a lexer)
      */
-    public static void main(String[] args) {
-        
-    }
-    
-    public static void main(CommandLine args) {
-        
+    public static int main(CommandLine args) {
+        Logging.LOGGER.println("[[ Running in Lexer mode ]]", "debug");
+        return 0;
     }
     
 }

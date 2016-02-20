@@ -27,62 +27,19 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.lexer;
+package co.louiscap.moka.parser;
 
-import co.louiscap.moka.utils.data.Location;
-import java.io.Serializable;
-import java.util.Objects;
+import co.louiscap.moka.utils.data.DirectedMultiStore;
 
 /**
- * A singular lexical token; an atomic element of a program's source code.
- * @author Louis Capitanchik
+ * 
+ * @author Louis Captianchik
  */
-public class Token implements Serializable {
-
-    private static final long serialVersionUID = 7669745224661228245L;
+public class Parser {
     
-    public final String ident, content;
+    private DirectedMultiStore<GraphRelations> graphPoints;
     
-    public final Location loc;
-    
-    public Token(String ident, String content, Location loc) {
-        this.ident = ident;
-        this.content = content;
-        this.loc = loc;
+    public Parser(LangRule[] rules) {
+        //TODO: Create graph here
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.ident);
-        hash = 67 * hash + Objects.hashCode(this.content);
-        hash = 67 * hash + Objects.hashCode(this.loc);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Token other = (Token) obj;
-        if (!Objects.equals(this.ident, other.ident)) {
-            return false;
-        }
-        if (!Objects.equals(this.content, other.content)) {
-            return false;
-        }
-        if (!Objects.equals(this.loc, other.loc)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 }

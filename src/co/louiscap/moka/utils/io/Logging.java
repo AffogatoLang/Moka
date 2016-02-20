@@ -27,62 +27,16 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.lexer;
-
-import co.louiscap.moka.utils.data.Location;
-import java.io.Serializable;
-import java.util.Objects;
+package co.louiscap.moka.utils.io;
 
 /**
- * A singular lexical token; an atomic element of a program's source code.
+ * Provides a globallly available logger instance
  * @author Louis Capitanchik
  */
-public class Token implements Serializable {
-
-    private static final long serialVersionUID = 7669745224661228245L;
-    
-    public final String ident, content;
-    
-    public final Location loc;
-    
-    public Token(String ident, String content, Location loc) {
-        this.ident = ident;
-        this.content = content;
-        this.loc = loc;
+public class Logging {
+    public static final MultiplexedStringPrinter LOGGER = new MultiplexedStringPrinter();
+    static {
+        LOGGER.addChannel("out", System.out);
+        LOGGER.addChannel("err", System.err);
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.ident);
-        hash = 67 * hash + Objects.hashCode(this.content);
-        hash = 67 * hash + Objects.hashCode(this.loc);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Token other = (Token) obj;
-        if (!Objects.equals(this.ident, other.ident)) {
-            return false;
-        }
-        if (!Objects.equals(this.content, other.content)) {
-            return false;
-        }
-        if (!Objects.equals(this.loc, other.loc)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 }

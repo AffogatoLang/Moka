@@ -35,6 +35,7 @@ import co.louiscap.moka.exceptions.InvalidModuleException;
 import co.louiscap.moka.lexer.LexFile;
 import co.louiscap.moka.parser.LangFile;
 import co.louiscap.moka.translator.InterpFile;
+import co.louiscap.moka.utils.io.Logging;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class Module {
         try {
             propString = FileUtils.readFileToString(new File(directory, ModuleReader.MODULE_FILE_NAME), "utf-8");
         } catch (IOException ex) {
-            MokaCLI.PRINTER.println(ex.getLocalizedMessage(), "err");
+            ex.printStackTrace(Logging.LOGGER.getChannel("err"));
             throw new InvalidModuleException(tmpid, "Cannot load " + ModuleReader.MODULE_FILE_NAME, ex);
         }
         
@@ -226,8 +227,8 @@ public class Module {
             try {
                 storage.put(FilenameUtils.getBaseName(cur.getPath()), FileUtils.readFileToString(cur, "utf-8"));
             } catch (IOException ex) {
-                MokaCLI.PRINTER.println("Failed to load lexical file " + cur.getAbsolutePath(), "err");
-                ex.printStackTrace();
+                Logging.LOGGER.println("Failed to load lexical file " + cur.getAbsolutePath(), "err");
+                ex.printStackTrace(Logging.LOGGER.getChannel("err"));
                 Logger.getLogger(Module.class.getName()).log(Level.INFO, "Failed to load lexical file {0}", cur.getAbsolutePath());
                 Logger.getLogger(Module.class.getName()).log(Level.SEVERE, null, ex);
             }

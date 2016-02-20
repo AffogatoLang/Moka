@@ -29,13 +29,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.utils.data;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Represents a line and character number within a [named] file
  * @author Louis Capitanchik
  */
-public class Location {
+public class Location implements Serializable{
+
+    private static final long serialVersionUID = 2390553339598948258L;
+    
     public final String filename;
     public final int line, column;
 

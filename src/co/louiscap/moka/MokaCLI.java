@@ -91,7 +91,8 @@ public class MokaCLI {
     private static Options setupCommandLine() {
         Options options = new Options();
         options.addOption("v", false, "Verbose; Print debug info to stdout");
-        options.addOption("o", "out", true, "Outfile; the compilation target");
+        options.addOption("t", "target", true, "Target output file for compiling"
+                + "the source code. Requires `source` to be set.");
         options.addOption("p", "partial", true, "Specify the precompiled partial"
                 + " to be used for parsing the source program");
         options.addOption("b", false, "Build a Moka partial that includes "
@@ -103,6 +104,18 @@ public class MokaCLI {
                 + "sub-section of Moka. "
                 + "Requires `chunk` to be specified for the pre-compiled sub"
                 + "section being used");
+        options.addOption("c", "chunk", true, "Specifies a Moka chunk to be used"
+                + " with the `mode` argument");
+        options.addOption("l", "language", true, "Use the specified pre-compiled"
+                + " language core instead of a Moka Module");
+        options.addOption("s", "source", true, "The source program to process "
+                + "with a set of Moka language files");
+        options.addOption("i", "input", true, "The input Moka Module to use. "
+                + "Expects the target to be a folder, unless the `a` argument"
+                + " is also provided, which will change expectations to a "
+                + ".moka archive");
+        options.addOption("a", false, "Archive; The provided moka input is "
+                + "stored in a .moka archive instead of pointing to a directory");
         return options;
     }
     

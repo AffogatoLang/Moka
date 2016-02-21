@@ -49,7 +49,8 @@ public class ParserCLI {
     public static int main(CommandLine args) throws InvalidFormatException {
         Logging.LOGGER.println("[[ Running in Parser mode ]]", "debug");
         LangRule[] tmp = {
-            new LangRule("S_ASSIGN : T_VAR T_WHITESPACE? T_IDENT T_WHITESPACE? T_ASSIGN T_WHITESPACE? S_DATA")
+            new LangRule("S_ASSIGN : T_VAR T_WHITESPACE? T_IDENT T_WHITESPACE? T_ASSIGN T_WHITESPACE? S_DATA"),
+            new LangRule("S_ASSIGN : T_IDENT T_WHITESPACE? T_ASSIGN T_WHITESPACE? S_DATA")
         };
         Parser p = new Parser(tmp);
         return 0;

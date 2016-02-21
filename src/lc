@@ -1,1 +1,1 @@
-find ./ -type f -exec wc -l {} +
+find ./ ! -path .git -type f -exec wc -l {} +

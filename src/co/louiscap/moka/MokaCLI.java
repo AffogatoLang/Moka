@@ -29,6 +29,7 @@
  */
 package co.louiscap.moka;
 
+import co.louiscap.moka.exceptions.InvalidFormatException;
 import co.louiscap.moka.utils.io.Logging;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -49,7 +50,7 @@ public class MokaCLI {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidFormatException {
         
         CommandLineParser cliparse = new DefaultParser();
         Options opts = setupCommandLine();
@@ -74,6 +75,9 @@ public class MokaCLI {
             switch(opt) {
                 case "lexer":
                     System.exit(LexerCLI.main(PROGOPTS));
+                    break;
+                case "parser":
+                    System.exit(ParserCLI.main(PROGOPTS));
                     break;
                 default:
                     Logging.LOGGER.println("No such mode " + opt, "err");

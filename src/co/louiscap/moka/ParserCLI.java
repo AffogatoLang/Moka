@@ -27,46 +27,32 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.parser;
+package co.louiscap.moka;
 
-import co.louiscap.moka.exceptions.MismatchedRuleTargetException;
-import co.louiscap.moka.parser.graph.AbstractNode;
-import co.louiscap.moka.parser.graph.GraphRelations;
-import co.louiscap.moka.utils.data.DirectedMultiStore;
+import co.louiscap.moka.exceptions.InvalidFormatException;
+import co.louiscap.moka.parser.LangRule;
+import co.louiscap.moka.parser.Parser;
 import co.louiscap.moka.utils.io.Logging;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.commons.cli.CommandLine;
 
 /**
- * 
- * @author Louis Captianchik
+ * @author Louis Capitanchik
  */
-public class Parser {
-    
-    private DirectedMultiStore<GraphRelations> graphPoints;
-    
-    private HashMap<String, LangRule> condensedRules;
-    
-    private HashMap<String, AbstractNode> nodes;
-    
-    public Parser(LangRule[] rules) {
-        condensedRules = new HashMap<>();
-        Arrays.stream(rules).forEach(rule -> {
-            if(condensedRules.containsKey(rule.target)) {
-                try {
-                    condensedRules.get(rule.target).merge(rule);
-                } catch (MismatchedRuleTargetException ex) {
-                    //Should never happen based on logic
-                    ex.printStackTrace(Logging.LOGGER.getChannel("err"));
-                }
-            } else {
-                condensedRules.put(rule.target, rule);
-            }
-        });
-        condensedRules.entrySet().forEach(System.out::println);
-        
-        //TODO: Create graph here
+public class ParserCLI {
+    /**
+     * Runs the program up in lexer only mode. Requires a pre-parsed command line
+     * rather than the standard array of string args.
+     * @param args A list of pre-parsed command line options. Globals like the
+     * logging system should already be configured (although lexer specific options
+     * may override global configs for the purpose of running solely as a lexer)
+     */
+    public static int main(CommandLine args) throws InvalidFormatException {
+        Logging.LOGGER.println("[[ Running in Parser mode ]]", "debug");
+        LangRule[] tmp = {
+            new LangRule("S_ASSIGN : T_VAR T_WHITESPACE? T_IDENT T_WHITESPACE? T_ASSIGN T_WHITESPACE? S_DATA")
+        };
+        Parser p = new Parser(tmp);
+        return 0;
     }
+    
 }

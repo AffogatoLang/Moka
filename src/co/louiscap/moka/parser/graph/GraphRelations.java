@@ -27,46 +27,22 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.parser;
-
-import co.louiscap.moka.exceptions.MismatchedRuleTargetException;
-import co.louiscap.moka.parser.graph.AbstractNode;
-import co.louiscap.moka.parser.graph.GraphRelations;
-import co.louiscap.moka.utils.data.DirectedMultiStore;
-import co.louiscap.moka.utils.io.Logging;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+package co.louiscap.moka.parser.graph;
 
 /**
- * 
- * @author Louis Captianchik
+ * The relations between nodes in a graph
+ * @author Louis Capitanchik
  */
-public class Parser {
+public enum GraphRelations {
+    THEN("Then"),
+    TERMINATES("Terminates");
     
-    private DirectedMultiStore<GraphRelations> graphPoints;
-    
-    private HashMap<String, LangRule> condensedRules;
-    
-    private HashMap<String, AbstractNode> nodes;
-    
-    public Parser(LangRule[] rules) {
-        condensedRules = new HashMap<>();
-        Arrays.stream(rules).forEach(rule -> {
-            if(condensedRules.containsKey(rule.target)) {
-                try {
-                    condensedRules.get(rule.target).merge(rule);
-                } catch (MismatchedRuleTargetException ex) {
-                    //Should never happen based on logic
-                    ex.printStackTrace(Logging.LOGGER.getChannel("err"));
-                }
-            } else {
-                condensedRules.put(rule.target, rule);
-            }
-        });
-        condensedRules.entrySet().forEach(System.out::println);
-        
-        //TODO: Create graph here
+    final String name;
+    private GraphRelations(String name) {
+        this.name = name;
+    }
+    @Override
+    public String toString() {
+        return name;
     }
 }

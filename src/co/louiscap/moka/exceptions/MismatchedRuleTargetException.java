@@ -27,22 +27,26 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.moka.parser;
+package co.louiscap.moka.exceptions;
 
 /**
- * The relations between nodes in a graph
+ *
  * @author Louis Capitanchik
  */
-public enum GraphRelations {
-    THEN("Then"),
-    TERMINATES("Terminates");
+public class MismatchedRuleTargetException extends Exception {
+
+    public final String target, actual;
     
-    final String name;
-    private GraphRelations(String name) {
-        this.name = name;
+    public MismatchedRuleTargetException(String target, String actual) {
+        super("Attempted to extend " + actual + " with rule " + target);
+        this.target = target;
+        this.actual = actual;
     }
-    @Override
-    public String toString() {
-        return name;
+
+    public MismatchedRuleTargetException(String target, String actual, Throwable cause) {
+        super("Attempted to extend " + actual + " with rule " + target, cause);
+        this.target = target;
+        this.actual = actual;
     }
+    
 }

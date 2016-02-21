@@ -40,11 +40,11 @@ import org.apache.commons.cli.CommandLine;
  */
 public class ParserCLI {
     /**
-     * Runs the program up in lexer only mode. Requires a pre-parsed command line
+     * Runs the program up in parser only mode. Requires a pre-parsed command line
      * rather than the standard array of string args.
      * @param args A list of pre-parsed command line options. Globals like the
-     * logging system should already be configured (although lexer specific options
-     * may override global configs for the purpose of running solely as a lexer)
+     * logging system should already be configured (although parser specific options
+     * may override global configs for the purpose of running solely as a parser)
      */
     public static int main(CommandLine args) throws InvalidFormatException {
         Logging.LOGGER.println("[[ Running in Parser mode ]]", "debug");

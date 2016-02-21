@@ -29,15 +29,65 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.parser.graph;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
 /**
  * @author Louis Capitanchik
  */
-public abstract class AbstractNode {
+public class GraphPoint {
     public final String id;
-    public AbstractNode(String id) {
+    
+    protected Map<String, GraphPoint> connections;
+    protected Set<String> terminals;
+    
+    public GraphPoint(String id) {
         this.id = id;
+        this.connections = new HashMap<>();
+        this.terminals = new HashSet<>();
     }
-    public abstract void getHeadSub();
-    public abstract void getTailSub();
-    public abstract boolean hasSubs();
+    
+    /**
+     * Adds a link from this graph point to another graph point
+     * @param next 
+     */
+    public void addConnection(GraphPoint next) {
+        this.connections.put(next.id, next);
+    }
+
+    public GraphPoint getConnection(String id) {
+        return connections.get(id);
+    }
+    
+    public GraphPoint getConnection(GraphPoint gp) {
+        return this.getConnection(gp.id);
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final GraphPoint other = (GraphPoint) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -30,14 +30,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.moka.parser;
 
 import co.louiscap.moka.exceptions.MismatchedRuleTargetException;
-import co.louiscap.moka.parser.graph.AbstractNode;
 import co.louiscap.moka.parser.graph.GraphRelations;
 import co.louiscap.moka.utils.data.DirectedMultiStore;
 import co.louiscap.moka.utils.io.Logging;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 
@@ -45,14 +44,14 @@ import java.util.logging.Logger;
  */
 public class Parser {
     
-    private DirectedMultiStore<GraphRelations> graphPoints;
+    private DirectedMultiStore<GraphRelations> arcs;
     
     private HashMap<String, LangRule> condensedRules;
-    
-    private HashMap<String, AbstractNode> nodes;
+    private HashMap<String, String> terminals;
     
     public Parser(LangRule[] rules) {
         condensedRules = new HashMap<>();
+        terminals = new HashMap<>();
         Arrays.stream(rules).forEach(rule -> {
             if(condensedRules.containsKey(rule.target)) {
                 try {
@@ -65,7 +64,10 @@ public class Parser {
                 condensedRules.put(rule.target, rule);
             }
         });
-        condensedRules.entrySet().forEach(System.out::println);
+        condensedRules.values().forEach(rule -> {
+            List tokens = rule.sequences.stream().collect(Collectors.toList());
+            terminals
+        });
         
         //TODO: Create graph here
     }

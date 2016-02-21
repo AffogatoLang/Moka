@@ -36,7 +36,7 @@ import co.louiscap.moka.utils.string.StringChunker;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.MatchResult;
@@ -87,7 +87,7 @@ public class LangRule {
             }
         }
         ruleParts = collapse(ruleParts);
-        sequences = new HashSet<>();
+        sequences = new LinkedHashSet<>();
         createPermutations(ruleParts);
     }
     

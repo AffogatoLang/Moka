@@ -132,7 +132,13 @@ public class Module {
         if (langSource.size() != langFiles.size()) {
             Set<String> langKeys = langSource.keySet();
             langKeys.removeAll(langFiles.keySet());
-            langKeys.forEach(s -> loadLangFile(s));
+            langKeys.forEach(s -> {
+                try {
+                    loadLangFile(s);
+                } catch (InvalidFormatException ex) {
+                    ex.printStackTrace(Logging.LOGGER.getChannel("err"));
+                }
+            });
         }
         return langFiles;
     }
@@ -167,7 +173,7 @@ public class Module {
         return file;
     }
     
-    public LangFile getLangFileByName(String name) {
+    public LangFile getLangFileByName(String name) throws InvalidFormatException {
         LangFile file = langFiles.get(name);
         if(file == null) {
             loadLangFile(name);
@@ -198,7 +204,7 @@ public class Module {
      * LangFiles map, it needs to be loaded and placed in the map
      * @param name The name of the language file being loaded
      */
-    private void loadLangFile (String name) {
+    private void loadLangFile (String name) throws InvalidFormatException {
         langFiles.put(name, new LangFile(id, langSource.get(name)));
     }
      /**

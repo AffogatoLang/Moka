@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.moka.lexer;
 
 import co.louiscap.moka.utils.data.Location;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,7 +45,8 @@ public class LexRule implements Comparable<LexRule> {
 
     private final Integer priority;
     private final String outToken;
-    private final Pattern regex;
+    private final String pattern;
+    private transient final Pattern regex;
     
     public LexRule (int priority, String token, String pattern) {
         this.priority = priority;
@@ -54,6 +56,7 @@ public class LexRule implements Comparable<LexRule> {
             pattern = "^" + pattern;
         }
         
+        this.pattern = pattern;
         this.regex = Pattern.compile(pattern);
     }
     
@@ -99,6 +102,40 @@ public class LexRule implements Comparable<LexRule> {
         
         return sb.toString();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.priority);
+        hash = 97 * hash + Objects.hashCode(this.outToken);
+        hash = 97 * hash + Objects.hashCode(this.pattern);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LexRule other = (LexRule) obj;
+        if (!Objects.equals(this.outToken, other.outToken)) {
+            return false;
+        }
+        if (!Objects.equals(this.pattern, other.pattern)) {
+            return false;
+        }
+        if (!Objects.equals(this.priority, other.priority)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

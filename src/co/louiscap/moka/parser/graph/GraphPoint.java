@@ -58,12 +58,32 @@ public class GraphPoint {
         this.connections.put(next.id, next);
     }
 
+    /**
+     * Gets the GraphPoint object connected to this GraphPoint that has the
+     * specified ID. Will return null if this GraphPoint has no link to the 
+     * given ID.
+     * @param id
+     * @return 
+     */
     public GraphPoint getConnection(String id) {
         return connections.get(id);
     }
     
+    /**
+     * Gets the GraphPoint object connected to this GraphPoint that has the
+     * same ID as the specified GraphPoint. This method does not guarantee
+     * that the returned GraphPoint contains the same connections as the one
+     * provided, but it will still respect the <code>.equals()</code> contract
+     * for GraphPoints (ID equality)
+     * @param gp
+     * @return 
+     */
     public GraphPoint getConnection(GraphPoint gp) {
         return this.getConnection(gp.id);
+    }
+    
+    public void addTerminal(String terminalID) {
+        
     }
     
     @Override

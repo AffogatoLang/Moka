@@ -45,7 +45,7 @@ public class StringUtils {
         
         int cur = 0;
         
-        while((cur = src.indexOf("\n", cur)) != -1) {
+        while((cur = src.indexOf("\n", cur)+1) - 1 != -1 && !(src.replace("\\s+", "")).isEmpty()) {
             indexes.add(cur);
         }
         

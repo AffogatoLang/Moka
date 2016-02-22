@@ -29,7 +29,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.lexer;
 
+import co.louiscap.moka.utils.io.Logging;
 import co.louiscap.moka.utils.io.ModuleFile;
+import co.louiscap.moka.utils.string.StringChunker;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -40,15 +43,26 @@ public class LexFile implements ModuleFile {
 
     private final String source, moduleID;
     
-    private LinkedList<LexRule> rules;
+    private final LinkedList<LexRule> rules;
     
     public LexFile (String moduleID, String source) {
         this.moduleID = moduleID;
         this.source = source;
         
-        // TODO : Process the source into rules
+        Logging.LOGGER.println("Creating language file in " + moduleID, "debug");
+        
+        String[] lines = source.split("\\n|\\r|\\n\\r|\\r\\n");
         
         this.rules = new LinkedList<>();
+        Arrays.stream(lines).forEach(line -> {
+            StringChunker sc = new StringChunker(line);
+            int priority = Integer.parseInt(sc.getUntil(":").trim());
+            sc.skip(1);
+            String token = sc.getUntil(":").trim();
+            sc.skip(1);
+            String regex = sc.tail().trim();
+            rules.add(new LexRule(priority, token, regex));
+        });
     }
     
     @Override
@@ -62,8 +76,7 @@ public class LexFile implements ModuleFile {
     }
     
     public LexRule[] getRules() {
-        
-        return null;
+        return rules.stream().toArray(LexRule[]::new);
     }
     
 }

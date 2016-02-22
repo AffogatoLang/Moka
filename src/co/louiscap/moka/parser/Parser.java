@@ -66,7 +66,7 @@ public class Parser {
         });
         condensedRules.values().forEach(rule -> {
             List tokens = rule.sequences.stream().collect(Collectors.toList());
-            terminals
+            
         });
         
         //TODO: Create graph here

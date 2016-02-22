@@ -29,7 +29,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.parser;
 
+import co.louiscap.moka.exceptions.InvalidFormatException;
+import co.louiscap.moka.utils.io.Logging;
 import co.louiscap.moka.utils.io.ModuleFile;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -42,13 +45,22 @@ public class LangFile implements ModuleFile {
     
     protected final LinkedList<LangRule> rules;
     
-    public LangFile (String moduleID, String source) {
+    public LangFile (String moduleID, String source) throws InvalidFormatException {
         this.moduleID = moduleID;
         this.source = source;
         
-        // TODO : Process the source into rules
-        
         this.rules = new LinkedList<>();
+        
+        String[] lines = source.split("\\n|\\r|\\n\\r|\\r\\n");
+        Arrays.stream(lines).forEach(line -> {
+            if(!line.trim().isEmpty() && !line.trim().startsWith("#")) {
+                try {
+                    rules.add(new LangRule(line));
+                } catch (InvalidFormatException ex) {
+                    ex.printStackTrace(Logging.LOGGER.getChannel("err"));
+                }
+            }
+        });
     }
     
     @Override
@@ -62,8 +74,7 @@ public class LangFile implements ModuleFile {
     }
     
     public LangRule[] getRules() {
-        
-        return null;
+        return rules.stream().toArray(LangRule[]::new);
     }
     
 }

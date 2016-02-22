@@ -50,6 +50,17 @@ public class Token implements Serializable {
         this.content = content;
         this.loc = loc;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ident);
+        sb.append(";");
+        sb.append(content);
+        sb.append(";");
+        sb.append(loc.toString());
+        return sb.toString();
+    }
 
     @Override
     public int hashCode() {

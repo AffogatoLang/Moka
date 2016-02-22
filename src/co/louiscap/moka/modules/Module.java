@@ -29,7 +29,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.modules;
 
-import co.louiscap.moka.MokaCLI;
 import co.louiscap.moka.exceptions.InvalidFormatException;
 import co.louiscap.moka.exceptions.InvalidModuleException;
 import co.louiscap.moka.lexer.LexFile;
@@ -97,10 +96,11 @@ public class Module {
         loadDirectory(ModuleReader.PARSE_DIR_IDENT, langSource);
         loadDirectory(ModuleReader.INTERP_DIR_IDENT, interpSource);
         
-        Yaml yaml = new Yaml(new SafeConstructor());
+        Yaml yaml = new Yaml();
         properties = yaml.loadAs(propString, Map.class);
         
         validatePropertiesFile(properties);
+        id = (String)properties.get("name");
     }
     
     public String getID() {
@@ -225,7 +225,7 @@ public class Module {
         for (String fname : fileNames) {
             File cur = new File(curDir, fname);
             try {
-                storage.put(FilenameUtils.getBaseName(cur.getPath()), FileUtils.readFileToString(cur, "utf-8"));
+                storage.put(FilenameUtils.getName(cur.getPath()), FileUtils.readFileToString(cur, "utf-8"));
             } catch (IOException ex) {
                 Logging.LOGGER.println("Failed to load lexical file " + cur.getAbsolutePath(), "err");
                 ex.printStackTrace(Logging.LOGGER.getChannel("err"));

@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.moka.modules;
 
+import co.louiscap.moka.exceptions.InvalidFormatException;
 import co.louiscap.moka.exceptions.InvalidModuleException;
 import java.io.File;
 import java.util.Arrays;
@@ -136,6 +137,10 @@ public class ModuleReader {
     public File[] getPathsToLexFilesAsFile() {
         return Arrays.stream(getPathsToLexFiles())
                 .map(s -> new File(s)).toArray(File[]::new);
+    }
+    
+    public Module asModule() throws InvalidModuleException, InvalidFormatException {
+        return new Module(this.moduleDir);
     }
     
     /**

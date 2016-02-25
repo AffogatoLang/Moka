@@ -157,7 +157,6 @@ public class MokaCLI {
                         Logging.LOGGER.println(Arrays.toString(fileTokens), "debug");
                         
                         Collection<LangFile> langSet = module.getAllLangFiles().values();
-                        System.out.println(langSet);
                         RuleMerger merger = new RuleMerger();
                         langSet.stream()
                                 .flatMap(lang -> Arrays.stream(lang.getRules()))

@@ -1,2 +1,5 @@
 RIGHTLY name#
 VERILY "Hello " + name + "!"#
+VERILY "Is it not a lovely day today?"#
+RIGHTLY answer#
+VERILY "I concur."#

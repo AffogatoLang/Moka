@@ -3,9 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/commander-lol/Projects/Moka/src/co/louiscap/moka/modules/ModuleReader.java</file>
-            <file>file:/home/commander-lol/Projects/Moka/src/co/louiscap/moka/modules/InvalidModuleException.java</file>
-            <file>file:/home/commander-lol/Projects/Moka/test/co/louiscap/moka/modules/ModuleReaderTest.java</file>
             <file>file:/home/commander-lol/Projects/Moka/src/co/louiscap/moka/MokaCLI.java</file>
         </group>
     </open-files>

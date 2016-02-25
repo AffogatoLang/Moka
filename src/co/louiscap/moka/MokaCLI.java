@@ -138,6 +138,9 @@ public class MokaCLI {
                     lexFiles.forEach(file -> lexSet.addAll(Arrays.asList(file.getRules())));
                     
                     Lexer lexer = new Lexer(lexSet.stream().toArray(LexRule[]::new));
+                    Boolean swspc = (Boolean)module.options.getOrDefault("stripwhitespace", false);
+                    Logging.LOGGER.println("Stripping whitespace: " + swspc, "debug");
+                    lexer.setStripWhitespace(swspc);
                     if(PROGOPTS.hasOption("s")) {
                         File srcFile = new File(PROGOPTS.getOptionValue("s"));
                         if(!srcFile.exists()) {

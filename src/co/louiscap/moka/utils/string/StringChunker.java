@@ -255,6 +255,14 @@ public class StringChunker {
     }
     
     /**
+     * Skips over the whitespace positioned at the start of the remaining string
+     * and updates the position of the StringChunker accordingly
+     */
+    public void eatWhitespace() {
+        this.chunkWith(Pattern.compile("\\s+"));
+    }
+    
+    /**
      * Gets the contents of the source String prior to the current position of the StringChunker
      * @return A String containing all elements of the source string that have already been
      * processed; that is, all characters from the start of the source until the current position of

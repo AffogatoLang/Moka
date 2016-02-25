@@ -31,6 +31,7 @@ package co.louiscap.moka.lexer;
 
 import co.louiscap.moka.exceptions.LanguageSyntaxException;
 import co.louiscap.moka.utils.data.Location;
+import co.louiscap.moka.utils.io.Logging;
 import co.louiscap.moka.utils.number.IntUtils;
 import co.louiscap.moka.utils.string.StringChunker;
 import co.louiscap.moka.utils.string.StringUtils;
@@ -46,6 +47,7 @@ import java.util.regex.MatchResult;
  */
 public class Lexer {
     private LexRule[] rules;
+    private boolean stripWhitespace = false;
     
     /**
      * Create a new Lexer with the specified rule set. Rules should be in the
@@ -95,6 +97,9 @@ public class Lexer {
      * string that can't be parsed
      */
     public Token[] process(String src, String name) throws LanguageSyntaxException {
+        if(this.stripWhitespace) {
+            src = src.trim();
+        }
         final StringChunker sc = new StringChunker(src);
         final ArrayList<Token> tokens = new ArrayList<>();
         final int[] lineIndexes = StringUtils.getNewlineIndexes(src);
@@ -125,7 +130,14 @@ public class Lexer {
             if(t == null) {
                 throw new LanguageSyntaxException("Invalid syntax; no matching token", curLocation);
             }
+            if(this.stripWhitespace) {
+                sc.eatWhitespace();
+            }
         }
         return tokens.stream().toArray(i -> new Token[i]);
+    }
+    
+    public void setStripWhitespace(boolean sw) {
+        this.stripWhitespace = sw;
     }
 }

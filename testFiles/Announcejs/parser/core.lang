@@ -3,4 +3,4 @@ S_LINE : S_READ_IN S_LINE?
 S_LINE : S_PRINT_OUT S_LINE?
 
 # Define the program
-PROGRAM : S_LINE
+CORE : S_LINE

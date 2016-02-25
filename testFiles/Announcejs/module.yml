@@ -4,3 +4,5 @@ version: "0.1.0"
 author: "Louis Capitanchik"
 license: "BSD 3-Clause"
 core: "Announcejs"
+options:
+  stripwhitespace: true

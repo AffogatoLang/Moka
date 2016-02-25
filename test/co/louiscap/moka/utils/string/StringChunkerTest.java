@@ -137,6 +137,31 @@ public class StringChunkerTest {
         String result = instance.getUntil(needle);
         assertEquals(expResult, result);
     }
+    
+    @Test
+    public void testEatWhitespace() {
+        System.out.println("eatWhitespace");
+        String src = "     hahaha";
+        int expPos = 5;
+        String expTail = "hahaha";
+        StringChunker instance = new StringChunker(src);
+        instance.eatWhitespace();
+        assertEquals(expPos, instance.getPosition());
+        assertEquals(expTail, instance.tail());
+    }
+    
+        
+    @Test
+    public void testEatWhitespaceNoWhitespace() {
+        System.out.println("eatWhitespace-null");
+        String src = "hahaha";
+        int expPos = 0;
+        String expTail = "hahaha";
+        StringChunker instance = new StringChunker(src);
+        instance.eatWhitespace();
+        assertEquals(expPos, instance.getPosition());
+        assertEquals(expTail, instance.tail());
+    }
 //
 //    /**
 //     * Test of getUntil method, of class StringChunker.

@@ -47,7 +47,6 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.SafeConstructor;
 
 /**
  * Represents a Moka module, loaded into memory
@@ -69,6 +68,7 @@ public class Module {
     private final Map properties;
     
     private String tmpid, id;
+    public final Map options;
     
     public Module(File verifiedSourceDir) throws InvalidModuleException, InvalidFormatException {
         directory = verifiedSourceDir;
@@ -101,6 +101,7 @@ public class Module {
         
         validatePropertiesFile(properties);
         id = (String)properties.get("name");
+        options = (Map)properties.getOrDefault("options", new HashMap());
     }
     
     public String getID() {
